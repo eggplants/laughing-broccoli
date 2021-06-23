@@ -1,0 +1,14 @@
+name: Check max cpu
+
+on:
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Check
+        run: python -c'import os;print(os.cpu_count())'
