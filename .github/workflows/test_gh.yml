@@ -11,6 +11,6 @@ jobs:
         with:
           python-version: 3.8
       - name: Check
-        run: python -c"import os;print(os.environ.keys())"
+        run: python -c 'import os,pprint;[pprint.pprint(i)for i in os.environ.items()]'
         env:
           github_token: ${{ secrets.GH_ADMIN_TOKEN }}
