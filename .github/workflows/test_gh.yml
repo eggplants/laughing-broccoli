@@ -11,6 +11,6 @@ jobs:
         with:
           python-version: 3.8
       - name: Check
-        run: python -c"print(os.environ['INPUT_GITHUB_TOKEN'])"
-        with:
+        run: python -c"import os;print(os.environ['INPUT_GITHUB_TOKEN'])"
+        env:
           github_token: ${{ secrets.GH_ADMIN_TOKEN }}
