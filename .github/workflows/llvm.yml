@@ -1,0 +1,25 @@
+name: llvm Test
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ${{matrix.os}}
+    if: "! contains(github.event.head_commit.message, '[skip ci]')"
+    strategy:
+      matrix:
+        include:
+          - build: linux-musl
+            os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+          - build: mac
+            os: macOS-latest
+            target: x86_64-apple-darwin
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Check llvm
+        run: |
+          llvm
+          llvm-config --version
