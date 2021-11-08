@@ -1,5 +1,9 @@
 name: mac test
 on: [workflow_dispatch]
+
+env:
+  PYTHON_VERSION: 3.9
+
 jobs:
   mac:
     runs-on: macOS-latest
@@ -15,6 +19,9 @@ jobs:
           echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
           echo 'eval "$(pyenv init --path)"' >> ~/.bash_profile
           source ~/.bash_profile
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        run: |
           p="$(brew --prefix tcl-tk)"
           env \
             PATH="${p}/bin:$PATH" \
