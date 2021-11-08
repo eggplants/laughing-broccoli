@@ -6,9 +6,9 @@ jobs:
     steps:
       - name: Checkout commit
         uses: actions/checkout@master
-      - name: Set up Python ${{ env.PYTHON_VERSION }}
+      - name: Set up Python 3.9
         uses: actions/setup-python@master
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: 3.9
       - name: test
         run: python -c "import tkinter;print(tkinter.Tcl().eval('info patchlevel'))"
