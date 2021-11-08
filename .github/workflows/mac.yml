@@ -34,4 +34,4 @@ jobs:
           pyenv global ${{ env.PYTHON_VERSION }}
           pyenv versions
           python3 -V
-          python -c "import tkinter;print('tk:',tkinter.Tcl().eval('info patchlevel'))"
+          python3 -c "import tkinter;print('tk:',tkinter.Tcl().eval('info patchlevel'))"
