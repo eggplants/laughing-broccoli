@@ -1,0 +1,14 @@
+name: mac test
+on: [workflow_dispatch]
+jobs:
+  test:
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@master
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@master
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: test
+        run: python -c "import tkinter;print(tkinter.Tcl().eval('info patchlevel'))"
