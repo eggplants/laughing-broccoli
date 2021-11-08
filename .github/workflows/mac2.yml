@@ -22,9 +22,5 @@ jobs:
 
       - name: Check
         run: |
-          echo "py2:"
-          python -V
-          echo "py3:"
           python3 -V
-          echo "tki:"
-          python3 -c "import tkinter;print('tk:',tkinter.Tcl().eval('info patchlevel'))"
+          python3 -c "import tkinter;print('tk',tkinter.Tcl().eval('info patchlevel'))"
