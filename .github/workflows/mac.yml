@@ -2,7 +2,7 @@ name: mac test
 on: [workflow_dispatch]
 
 env:
-  PYTHON_VERSION: 3.9
+  PYTHON_VERSION: "3.9.7"
 
 jobs:
   mac:
@@ -11,7 +11,7 @@ jobs:
       - name: Checkout commit
         uses: actions/checkout@master
 
-      - name: Set up Python ${{ env.PYTHON_VERSION }}
+      - name: Install deps with brew
         run: |
           brew install tcl-tk pyenv
           echo 'export PATH="/usr/local/opt/tcl-tk/bin:$PATH"' >> ~/.bash_profile
