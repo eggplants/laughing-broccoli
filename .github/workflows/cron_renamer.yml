@@ -1,8 +1,9 @@
 name: Cron renamer
 
 on:
-  schedule:
-    - cron: '0 15 * * *'
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 15 * * *'
 
 jobs:
   build:
