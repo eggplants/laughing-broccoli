@@ -1,6 +1,12 @@
 name: llvm Test
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      llvm_version:
+        description: 'building version of LLVM'
+        required: true
+        default: '11.0'
 
 jobs:
   test:
@@ -22,7 +28,7 @@ jobs:
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
         with:
-          version: "10.0"
+          version: "${{ github.event.inputs.llvm_version }}"
       - name: Check llvm
         run: |
           llvm
