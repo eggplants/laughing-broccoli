@@ -13,10 +13,12 @@ jobs:
     steps:
       - name: Make progress
         run: |
-          ruby -e'b=15*(a=`date +%j`.to_f/
-          `date +%j -d 12/31`.to_i);puts `
-          funnychar -p 13 Year\ Progress`+
-          ?▓*b+?░*(15-b.to_i)+"#{a*100}%"'>progress
+          ruby -e'
+            b=15*(
+              a=`date +%j`.to_f/`date +%j -d 12/31`.to_i
+            )
+            puts "𝙔𝙚𝙖𝙧 𝙋𝙧𝙤𝙜𝙧𝙚𝙨𝙨", ?▓*b+?░*(15-b.to_i), "#{a*100}%"
+          ' > progress
           
       - name: Deploy
         uses: exuanbo/actions-deploy-gist@v1
