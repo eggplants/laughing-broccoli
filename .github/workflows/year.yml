@@ -23,7 +23,7 @@ jobs:
       - name: Update Gist
         run: |
           curl \
-            --fail --request PATCH
+            --fail --request PATCH \
             --header 'Content-Type: application/json' \
             --header 'Authorization: token '"${GIST_KEY}"' \
             --data '
@@ -35,4 +35,4 @@ jobs:
                   "content":"'"${progress}"'"
                 }
               }
-            }' "https://api.github.com/gists/${GIST_ID}"
+            }' -- "https://api.github.com/gists/${GIST_ID}"
