@@ -37,6 +37,3 @@ jobs:
               }
             }
             ' -- "https://api.github.com/gists/${GIST_ID}"
-          
-  
-  
