@@ -31,5 +31,5 @@ jobs:
           version: "${{ github.event.inputs.llvm_version }}"
       - name: Check llvm
         run: |
-          ./llvm
+          ls llvm
           llvm-config --version
