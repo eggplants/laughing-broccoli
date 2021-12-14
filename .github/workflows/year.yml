@@ -9,29 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      GIST_ID: b6a25f05a48b086ee73592d3f9d965d6
-      GIST_KEY: ${{ secrets.GIST_KEY }}
       TZ: 'Asia/Tokyo'
     steps:
-      - name: Update Gist
+      - name: Make progress
         run: |
-          curl "https://api.github.com/gists/${GIST_ID}" \
-            --fail --request PATCH \
-            --header 'Content-Type: application/json' \
-            --header "Authorization: token ${GIST_KEY}" \
-            --data '
-            {
-              "description":"",
-              "files":{
-                "Year Progress":{
-                  "filename":"Year Progress",
-                  "content":"'"$(
-                    ruby -e'
-                      b=15*(a=`date +%j`.to_f/`date +%j -d 12/31`.to_i)
-                      puts "progress=\"𝙔𝙚𝙖𝙧 𝙋𝙧𝙤𝙜𝙧𝙚𝙨𝙨\\n"+
-                      ?▓*b+?░*(15-b.to_i)+" #{a*100}%"+?"
-                    '
-                  )"'"
-                }
-              }
-            }'
+          ruby -e'b=15*(a=`date +%j`.to_f/
+          `date +%j -d 12/31`.to_i);puts `
+          funnychar -p 13 Year\ Progress`+
+          ?▓*b+?░*(15-b.to_i)+"#{a*100}%"'>progress
+          
+      - name: Deploy
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secret.GIST_KEY }}
+          gist_id: b6a25f05a48b086ee73592d3f9d965d6
+          gist_file_name: "Year Progress"
+          file_path: ./progress
