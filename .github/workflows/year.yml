@@ -1,0 +1,42 @@
+name: Cron contributter
+
+on:
+  schedule:
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GIST_ID: b6a25f05a48b086ee73592d3f9d965d6
+      GIST_KEY: ${{ secrets.GIST_KEY }}
+      TZ: 'Asia/Tokyo'
+    steps:
+      - name: Get Progress
+        run: |
+          ruby -e'
+            b=15*(a=`date +%j`.to_f/`date +%j -d 12/31`.to_i)
+            puts "progress=\"𝙔𝙚𝙖𝙧 𝙋𝙧𝙤𝙜𝙧𝙚𝙨𝙨\\n"+
+                  ?▓*b+?░*(15-b.to_i)+" #{a*100}%"+?"
+          ' >> "$GITHUB_ENV"
+      - name: Update Gist
+        run: |
+          curl \
+            --fail --request PATCH
+            --header 'Content-Type: application/json' \
+            --header 'Authorization: token '"${GIST_KEY}"' \
+            --data '
+            {
+              "description":"Year Progress Bot",
+              "files":{
+                "Year Progress":{
+                  "filename":"Year Progress",
+                  "content":"'"${progress}"'"
+                }
+              }
+            }
+            ' -- "https://api.github.com/gists/${GIST_ID}"
+          
+  
+  
