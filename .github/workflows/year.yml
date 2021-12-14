@@ -35,5 +35,4 @@ jobs:
                   "content":"'"${progress}"'"
                 }
               }
-            }
-            ' -- "https://api.github.com/gists/${GIST_ID}"
+            }' "https://api.github.com/gists/${GIST_ID}"
