@@ -13,26 +13,25 @@ jobs:
       GIST_KEY: ${{ secrets.GIST_KEY }}
       TZ: 'Asia/Tokyo'
     steps:
-      - name: Get Progress
-        run: |
-          ruby -e'
-            b=15*(a=`date +%j`.to_f/`date +%j -d 12/31`.to_i)
-            puts "progress=\"𝙔𝙚𝙖𝙧 𝙋𝙧𝙤𝙜𝙧𝙚𝙨𝙨\\n"+
-                  ?▓*b+?░*(15-b.to_i)+" #{a*100}%"+?"
-          ' >> "$GITHUB_ENV"
       - name: Update Gist
         run: |
           curl "https://api.github.com/gists/${GIST_ID}" \
             --fail --request PATCH \
             --header 'Content-Type: application/json' \
-            --header 'Authorization: token '"${GIST_KEY}"' \
+            --header "Authorization: token ${GIST_KEY}" \
             --data '
             {
-              "description":"Year Progress Bot",
+              "description":"",
               "files":{
                 "Year Progress":{
                   "filename":"Year Progress",
-                  "content":"'"${progress}"'"
+                  "content":"'"$(
+                    ruby -e'
+                      b=15*(a=`date +%j`.to_f/`date +%j -d 12/31`.to_i)
+                      puts "progress=\"𝙔𝙚𝙖𝙧 𝙋𝙧𝙤𝙜𝙧𝙚𝙨𝙨\\n"+
+                      ?▓*b+?░*(15-b.to_i)+" #{a*100}%"+?"
+                    '
+                  )"'"
                 }
               }
             }'
