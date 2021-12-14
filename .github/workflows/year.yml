@@ -1,4 +1,4 @@
-name: Cron contributter
+name: Year Progress
 
 on:
   schedule:
