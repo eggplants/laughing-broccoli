@@ -25,5 +25,6 @@ jobs:
         with:
           token: ${{ secrets.GIST_KEY }}
           gist_id: b6a25f05a48b086ee73592d3f9d965d6
+          gist_description: "𝙔𝙚𝙖𝙧 𝙋𝙧𝙤𝙜𝙧𝙚𝙨𝙨: https://git.io/JD0Cp"
           gist_file_name: "𝙔𝙚𝙖𝙧 𝙋𝙧𝙤𝙜𝙧𝙚𝙨𝙨"
           file_path: ./progress
