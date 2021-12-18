@@ -1,0 +1,24 @@
+name: check kernel
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check:
+    runs-on: ${{ matrix.runs-on }}
+    strategy:
+      matrix:
+        include:
+          - runs-on: ubuntu-latest
+            os: linux
+          - runs-on: macOS-latest
+            os: darwin
+          - runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: shell uname -s
