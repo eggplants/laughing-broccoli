@@ -1,4 +1,3 @@
-
 name: Revive
 
 on:
@@ -9,7 +8,9 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
     - name: Configure git
       run: |
         echo "https://${GITHUB_ACTOR}"
