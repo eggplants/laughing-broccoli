@@ -1,0 +1,39 @@
+name: Morning
+
+on:
+  schedule:
+    - cron: "1 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      MY_SCREEN_NAME: egpl0
+      MY_LANGUAGE: ja
+      CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+      CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+      ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_KEY }}
+      ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+      TZ: 'Asia/Tokyo'
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install shindan-cli
+      - name: Check date
+        run: |
+          date
+      - name: Setup tweet.sh
+        run: |
+          sudo apt install curl jq nkf openssl -y
+          curl -s https://raw.githubusercontent.com/piroor/tweet.sh/trunk/tweet.sh > tweet.sh
+          chmod +x tweet.sh
+      - name: Post on Twitter
+        run: |
+          echo ${MY_SCREEN_NAME}
+          ./tweet.sh post "$(shindan 1068122 eggplants -l)"
