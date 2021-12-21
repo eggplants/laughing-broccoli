@@ -22,7 +22,7 @@ jobs:
           date
       - name: Setup tweet.sh
         run: |
-          sudo apt install curl jq nkf openssl -y
+          sudo apt install nkf -y
           curl -s https://raw.githubusercontent.com/piroor/tweet.sh/trunk/tweet.sh > tweet.sh
           chmod +x tweet.sh
       - name: Setup contributter.sh
