@@ -29,4 +29,15 @@ jobs:
           mv libpdcurses.a C:\msys64\mingw64\lib
           mv ..\curses.h C:\msys64\mingw64\include
           mv ..\panel.h C:\msys64\mingw64\include
-
+      - name: Test
+        run: |
+          Invoke-WebRequest 'https://web.archive.org/web/20070220170601if_/http://www.tkl.iis.u-tokyo.ac.jp:80/~toyoda/sl/sl.tar' -OutFile sl.tar
+          tar -xopf sl.tar
+          cd sl
+          Invoke-WebRequest 'https://web.archive.org/web/20090316133609/http://www.izumix.org.uk:80/sl/sl5-1.patch' -OutFile sl5-1.patch
+          git apply -p1 sl5-1.patch
+          get-content sl.c | -replace "ncurses/","" | Out-File _
+          mv _ sl.c
+          make
+          mv sl sl-h
+          ls
