@@ -37,6 +37,7 @@ jobs:
         shell: bash
         run: |
           cd sl-h/sl-h
-          sed -i 's/lncurses/lpdcurses -I C:\ncurses\include -L C:\ncurses\lib /' Makefile
+          sed -i 's/lncurses/lpdcurses -I C:\\ncurses\\include -L C:\\ncurses\\lib /' Makefile
+          cat Makefile
           make
           mv sl sl-h
