@@ -14,9 +14,6 @@ jobs:
         run: |
           cd master\PDCurses-master\wincon
           make -f Makefile WIDE=Y DLL=Y UTF8=Y
-      - name: Install toolchain
-        shell: bash
-        run: pacman -Sy mingw-w64-i686-toolchain
       - name: Install
         run: |
           New-Item C:\ncurses -ItemType Directory
