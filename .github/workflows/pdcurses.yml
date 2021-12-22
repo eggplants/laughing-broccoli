@@ -36,6 +36,8 @@ jobs:
       - name: Test - make
         shell: bash
         run: |
-          cd sl-h
+          ls
+          ls sl-h
+          cd sl-h/sl-h
           make
           mv sl sl-h
