@@ -4,17 +4,15 @@ on: [workflow_dispatch, push]
 jobs:
   build:
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: bash
 
     steps:
       - name: DL
         run: |
           ls
-          wget https://github.com/wmcbrine/PDCurses/archive/refs/heads/master.zip
-          unzip master.zip
+          Invoke-WebRequest https://github.com/wmcbrine/PDCurses/archive/refs/heads/master.zip
+          Expand-Archive -Path master.zip
       - name: Make
+        shell: bash
         run: |
           ls
           cd PDCurses-master\wincon
@@ -24,7 +22,6 @@ jobs:
           ls
           echo "PATH=$PATH:C:\msys64\mingw64\bin" >> $GITHUB_ENV
       - name: Install
-        # shell: powershell
         run: |
           ls
           mv pdcurses.a libcurses.a
