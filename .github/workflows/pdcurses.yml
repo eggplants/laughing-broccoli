@@ -15,7 +15,7 @@ jobs:
         shell: bash
         run: |
           ls
-          cd PDCurses-master\wincon
+          cd master\PDCurses-master\wincon
           make -f Makefile WIDE=Y DLL=Y
       - name: Set PATH
         run: |
