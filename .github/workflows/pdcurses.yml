@@ -1,0 +1,31 @@
+name: Build pdcurses
+
+on: [workflow_dispatch, push]
+jobs:
+  build:
+    runs-on: windows
+
+    steps:
+      - name: DL
+        run: |
+          ls
+          wget https://github.com/wmcbrine/PDCurses/archive/refs/heads/master.zip
+          unzip master.zip
+      - name: Make
+        run: |
+          ls
+          cd PDCurses-master\wincon
+          make -f Makefile WIDE=Y DLL=Y
+      - name: Set PATH
+        shell: bash
+        run: |
+          ls
+          echo "PATH=$PATH:C:\msys64\mingw64\bin" >> $GITHUB_ENV
+      - name: Install
+        run: |
+          ls
+          mv pdcurses.a libcurses.a
+          mv pdcurses.dll C:\msys64\mingw64\bin
+          mv libpdcurses.a C:\msys64\mingw64\lib
+          mv curses.h panel.h C:\msys64\mingw64\include
+          
