@@ -24,7 +24,7 @@ jobs:
       - name: Install
         run: |
           cd master\PDCurses-master\wincon
-          mv pdcurses.a libcurses.a
+          mv pdcurses.a libpdcurses.a
           mv pdcurses.dll C:\msys64\mingw64\bin
           mv libpdcurses.a C:\msys64\mingw64\lib
           mv ..\curses.h ..\panel.h C:\msys64\mingw64\include
