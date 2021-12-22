@@ -37,6 +37,7 @@ jobs:
           Invoke-WebRequest 'https://web.archive.org/web/20090316133609/http://www.izumix.org.uk:80/sl/sl5-1.patch' -OutFile sl5-1.patch
           git apply -p1 sl5-1.patch
           (Get-Content -path sl.c -Raw) -replace "ncurses/","" | Out-File _
+          rm sl.c
           mv _ sl.c
           make
           mv sl sl-h
