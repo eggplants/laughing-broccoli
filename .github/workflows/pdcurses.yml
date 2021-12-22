@@ -39,6 +39,6 @@ jobs:
           ls
           ls sl-h
           cd sl-h/sl-h
-          sed -i 's/ncurses/lpdcurses/' Makefile
+          sed -i 's/lncurses/lpdcurses/' Makefile
           make
           mv sl sl-h
