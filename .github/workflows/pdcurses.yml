@@ -9,7 +9,7 @@ jobs:
       - name: DL
         run: |
           ls
-          Invoke-WebRequest https://github.com/wmcbrine/PDCurses/archive/refs/heads/master.zip
+          Invoke-WebRequest https://github.com/wmcbrine/PDCurses/archive/refs/heads/master.zip -OutFile master.zip
           Expand-Archive -Path master.zip
       - name: Make
         shell: bash
