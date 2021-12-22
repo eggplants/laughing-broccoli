@@ -39,6 +39,7 @@ jobs:
           (Get-Content -path sl.c -Raw) -replace "ncurses/","" | Out-File _
           rm sl.c
           mv _ sl.c
+          ls
       - name: Test - make
         run: |
           cd sl
