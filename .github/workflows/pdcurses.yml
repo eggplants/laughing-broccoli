@@ -12,10 +12,10 @@ jobs:
           Invoke-WebRequest https://github.com/wmcbrine/PDCurses/archive/refs/heads/master.zip -OutFile master.zip
           Expand-Archive -Path master.zip
       - name: Make
-        shell: bash
+        # shell: bash
         run: |
           ls
-          cd master/PDCurses-master/wincon
+          cd master\PDCurses-master\wincon
           make -f Makefile WIDE=Y DLL=Y
       - name: Set PATH
         run: |
@@ -39,6 +39,7 @@ jobs:
           (Get-Content -path sl.c -Raw) -replace "ncurses/","" | Out-File _
           rm sl.c
           mv _ sl.c
+          ls
           make
           mv sl sl-h
           ls
