@@ -27,5 +27,6 @@ jobs:
           mv pdcurses.a libpdcurses.a
           mv pdcurses.dll C:\msys64\mingw64\bin
           mv libpdcurses.a C:\msys64\mingw64\lib
-          mv ..\curses.h ..\panel.h C:\msys64\mingw64\include
-          
+          mv ..\curses.h C:\msys64\mingw64\include
+          mv ..\panel.h C:\msys64\mingw64\include
+
