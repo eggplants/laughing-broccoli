@@ -8,17 +8,15 @@ jobs:
     steps:
       - name: DL
         run: |
-          ls
           Invoke-WebRequest https://github.com/wmcbrine/PDCurses/archive/refs/heads/master.zip -OutFile master.zip
           Expand-Archive -Path master.zip
       - name: Make
-        # shell: bash
         run: |
-          ls
           cd master\PDCurses-master\wincon
           make -f Makefile WIDE=Y DLL=Y UTF8=Y
       - name: Install
         run: |
+          pacman -Sy mingw-w64-i686-toolchain
           New-Item C:\ncurses -ItemType Directory
           New-Item C:\ncurses\bin -ItemType Directory
           New-Item C:\ncurses\lib -ItemType Directory
@@ -38,6 +36,5 @@ jobs:
         run: |
           cd sl-h/sl-h
           sed -i 's/lncurses/lpdcurses -I C:\\ncurses\\include -L C:\\ncurses\\lib /' Makefile
-          cat Makefile
           make
           mv sl sl-h
