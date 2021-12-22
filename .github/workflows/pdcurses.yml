@@ -16,19 +16,19 @@ jobs:
         run: |
           ls
           cd master\PDCurses-master\wincon
-          make -f Makefile WIDE=Y DLL=Y
-      - name: Set PATH
-        run: |
-          ls
-          echo "PATH=$PATH:C:\msys64\mingw64\bin" >> $GITHUB_ENV
+          make -f Makefile WIDE=Y DLL=Y UTF8=Y
       - name: Install
         run: |
+          New-Item C:\ncurses -ItemType Directory
+          New-Item C:\ncurses\bin -ItemType Directory
+          New-Item C:\ncurses\lib -ItemType Directory
+          New-Item C:\ncurses\include -ItemType Directory
           cd master\PDCurses-master\wincon
           mv pdcurses.a libpdcurses.a
-          mv pdcurses.dll C:\msys64\mingw64\bin
-          mv libpdcurses.a C:\msys64\mingw64\lib
-          mv ..\curses.h C:\msys64\mingw64\include
-          mv ..\panel.h C:\msys64\mingw64\include
+          mv pdcurses.dll C:\ncurses\bin
+          mv libpdcurses.a C:\ncurses\lib
+          mv ..\curses.h C:\ncurses\include
+          mv ..\panel.h C:\ncurses\include
       - name: Test - dl
         run: |
           Invoke-WebRequest 'https://github.com/eggplants/sl-h_binary/blob/master/sl-h.zip?raw=true' -OutFile sl-h.zip
@@ -36,9 +36,7 @@ jobs:
       - name: Test - make
         shell: bash
         run: |
-          ls
-          ls sl-h
           cd sl-h/sl-h
-          sed -i 's/lncurses/lpdcurses/' Makefile
+          sed -i 's/lncurses/lpdcurses -I C:\ncurses\include -L C:\ncurses\lib /' Makefile
           make
           mv sl sl-h
