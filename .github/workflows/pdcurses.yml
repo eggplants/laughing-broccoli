@@ -39,7 +39,7 @@ jobs:
         shell: bash
         run: |
           cd sl
-          patch -p1 < sl5-1.patch
+          git apply -p1 sl5-1.patch
           sed s_ncurses/__ sl.c > _
           mv _ sl.c
           make
