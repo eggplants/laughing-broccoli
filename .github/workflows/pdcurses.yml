@@ -40,6 +40,7 @@ jobs:
           Move-Item -Path termcap-lib\include -Destination C:\termcap -force
 
           cd C:\termcap\lib
+          ls
           rm libtermcap.def libtermcap.dll.a libtermcap.lib libtermcap-bcc.def libtermcap-bcc.lib
 
           ls C:\termcap
