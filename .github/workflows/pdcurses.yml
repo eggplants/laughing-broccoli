@@ -55,7 +55,8 @@ jobs:
         shell: bash
         run: |
           cd sl-h/sl-h
-          gcc sl.c -Wall -O2 -o sl -lpdcurses -ltermcap \
+          gcc sl.c -Wall -O2 -m32 \
+                   -o sl -lpdcurses -ltermcap \
                    -I C:\\ncurses\\include -I C:\\termcap\\include \
                    -L C:\\ncurses\\lib -L C:\\termcap\\lib -DLINUX20
           mv sl sl-h
