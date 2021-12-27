@@ -39,7 +39,8 @@ jobs:
           Move-Item -Path termcap-lib\lib -Destination C:\termcap -force
           Move-Item -Path termcap-lib\include -Destination C:\termcap -force
 
-          Remove-Item C:\termcap\lib\* -Exclude C:\termcap\lib\libtermcap.a
+          cd C:\termcap\lib
+          Remove-Item -Path * -Exclude libtermcap.a
 
           ls C:\termcap
           ls C:\termcap\include
