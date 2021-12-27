@@ -38,7 +38,8 @@ jobs:
           Move-Item -Path termcap-bin\bin -Destination C:\termcap -force
           Move-Item -Path termcap-lib\lib -Destination C:\termcap -force
           Move-Item -Path termcap-lib\include -Destination C:\termcap -force
-          
+
+          cd C:\termcap\lib
           rm libtermcap.def libtermcap.dll.a libtermcap.lib libtermcap-bcc.def libtermcap-bcc.lib
 
           ls C:\termcap
