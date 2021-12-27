@@ -18,7 +18,6 @@ jobs:
           New-Item C:\ncurses\bin -ItemType Directory
           New-Item C:\ncurses\lib -ItemType Directory
           New-Item C:\ncurses\include -ItemType Directory
-          cd master\PDCurses-master\wincon
           mv pdcurses.a libpdcurses.a
           mv pdcurses.dll C:\ncurses\bin
           mv libpdcurses.a C:\ncurses\lib
