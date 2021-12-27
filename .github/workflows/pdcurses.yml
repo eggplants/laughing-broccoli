@@ -44,6 +44,7 @@ jobs:
       - name: Test - make
         shell: bash
         run: |
+          ls C:
           cd sl-h/sl-h
           gcc sl.c -Wall -O2 -o sl -lpdcurses -ltermcap \
                    -I C:\ncurses\include -I C:\termcap\include \
