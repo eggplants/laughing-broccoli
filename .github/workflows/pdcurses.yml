@@ -45,6 +45,8 @@ jobs:
         shell: bash
         run: |
           cd sl-h/sl-h
-          sed -i 's/lncurses/lpdcurses -I C:\\ncurses\\include -I C:\\termcap\\include -L C:\\ncurses\\lib -L C:\\termcap\\lib /' Makefile
-          make
+          gcc sl.c -Wall -O2 -o sl -lpdcurses -ltermcap \
+                   -I C:\ncurses\include -I C:\termcap\include \
+                   -L C:\ncurses\lib -L C:\termcap\lib 
           mv sl sl-h
+          ls -lah
