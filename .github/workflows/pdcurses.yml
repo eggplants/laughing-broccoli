@@ -6,16 +6,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: DL
+      - name: Install - pdcurse
         run: |
           Invoke-WebRequest https://github.com/wmcbrine/PDCurses/archive/refs/heads/master.zip -OutFile master.zip
           Expand-Archive -Path master.zip
-      - name: Make
-        run: |
+          
           cd master\PDCurses-master\wincon
           make -f Makefile WIDE=Y DLL=Y UTF8=Y
-      - name: Install
-        run: |
+          
           New-Item C:\ncurses -ItemType Directory
           New-Item C:\ncurses\bin -ItemType Directory
           New-Item C:\ncurses\lib -ItemType Directory
@@ -26,14 +24,28 @@ jobs:
           mv libpdcurses.a C:\ncurses\lib
           mv ..\curses.h C:\ncurses\include
           mv ..\panel.h C:\ncurses\include
+
+      - name: Install - termcap
+        run: |
+          Invoke-WebRequest https://jaist.dl.sourceforge.net/project/gnuwin32/termcap/1.3.1/termcap-1.3.1-bin.zip -OutFile termcap-bin.zip
+          Expand-Archive -Path termcap-bin.zip
+          Invoke-WebRequest https://jaist.dl.sourceforge.net/project/gnuwin32/termcap/1.3.1/termcap-1.3.1-lib.zip -OutFile termcap-lib.zip
+          Expand-Archive -Path termcap-lib.zip
+          New-Item C:\termcap -ItemType Directory
+          Move-Item -Path termcap-bin\bin -Destination C:\termcap -force
+          Move-Item -Path termcap-lib\lib -Destination C:\termcap -force
+          Move-Item -Path termcap-lib\include -Destination C:\termcap -force
+          ls C:\termcap
+
       - name: Test - dl
         run: |
           Invoke-WebRequest 'https://github.com/eggplants/sl-h_binary/blob/master/sl-h.zip?raw=true' -OutFile sl-h.zip
           Expand-Archive -Path sl-h.zip
+
       - name: Test - make
         shell: bash
         run: |
           cd sl-h/sl-h
-          sed -i 's/lncurses/lpdcurses -I C:\\ncurses\\include -L C:\\ncurses\\lib /' Makefile
+          sed -i 's/lncurses/lpdcurses -I C:\\ncurses\\include -I C:\\termcap\\include -L C:\\ncurses\\lib -L C:\\termcap\\lib /' Makefile
           make
           mv sl sl-h
