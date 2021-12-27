@@ -23,6 +23,9 @@ jobs:
           mv libpdcurses.a C:\ncurses\lib
           mv ..\curses.h C:\ncurses\include
           mv ..\panel.h C:\ncurses\include
+
+          ls C:\ncurses
+          ls C:\ncurses\include
           ls C:\ncurses\lib
 
       - name: Install - termcap
@@ -35,7 +38,10 @@ jobs:
           Move-Item -Path termcap-bin\bin -Destination C:\termcap -force
           Move-Item -Path termcap-lib\lib -Destination C:\termcap -force
           Move-Item -Path termcap-lib\include -Destination C:\termcap -force
+
           ls C:\termcap
+          ls C:\termcap\include
+          ls C:\termcap\lib
 
       - name: Test - dl
         run: |
@@ -48,6 +54,6 @@ jobs:
           cd sl-h/sl-h
           gcc sl.c -Wall -O2 -o sl -lpdcurses -ltermcap \
                    -I C:\\ncurses\\include -I C:\\termcap\\include \
-                   -L C:\\ncurses\\lib -L C:\\termcap\\lib 
+                   -L C:\\ncurses\\lib -L C:\\termcap\\lib -DLINUX20
           mv sl sl-h
           ls -lah
