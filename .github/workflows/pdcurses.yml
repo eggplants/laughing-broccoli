@@ -23,6 +23,7 @@ jobs:
           mv libpdcurses.a C:\ncurses\lib
           mv ..\curses.h C:\ncurses\include
           mv ..\panel.h C:\ncurses\include
+          ls C:\termcap\lib
 
       - name: Install - termcap
         run: |
