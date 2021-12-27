@@ -46,7 +46,7 @@ jobs:
         run: |
           ls / -lah
           ls -lah
-          ls -lah mingw64
+          ls -lah /mingw64
           cd sl-h/sl-h
           gcc sl.c -Wall -O2 -o sl -lpdcurses -ltermcap \
                    -I C:\ncurses\include -I C:\termcap\include \
