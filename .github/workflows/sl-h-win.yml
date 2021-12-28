@@ -12,8 +12,8 @@ jobs:
           Expand-Archive -Path master.zip
           
           cd master\PDCurses-master\wincon
-          $data=Get-Content Makefile | % { $_ -replace "-O2 -Wall","-O2 -Wall -m32" }
-          $data | Out-File Makefile -Encoding UTF8
+          # $data=Get-Content Makefile | % { $_ -replace "-O2 -Wall","-O2 -Wall -m32" }
+          # $data | Out-File Makefile -Encoding UTF8
           make -f Makefile WIDE=Y DLL=Y UTF8=Y
           
           New-Item C:\ncurses -ItemType Directory
