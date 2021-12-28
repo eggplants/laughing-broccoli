@@ -1,6 +1,6 @@
-name: Build pdcurses
+name: Build sl-h on windows
 
-on: [workflow_dispatch]
+on: [workflow_dispatch, push]
 jobs:
   build:
     runs-on: windows-latest
@@ -30,23 +30,31 @@ jobs:
           ls C:\ncurses\include
           ls C:\ncurses\lib
 
-      - name: Install - termcap
+      - name: DL - termcap
         run: |
-          Invoke-WebRequest https://jaist.dl.sourceforge.net/project/gnuwin32/termcap/1.3.1/termcap-1.3.1-bin.zip -OutFile termcap-bin.zip
-          Expand-Archive -Path termcap-bin.zip
-          Invoke-WebRequest https://jaist.dl.sourceforge.net/project/gnuwin32/termcap/1.3.1/termcap-1.3.1-lib.zip -OutFile termcap-lib.zip
-          Expand-Archive -Path termcap-lib.zip
+          Invoke-WebRequest https://ftp.gnu.org/gnu/termcap/termcap-1.3.1.tar.gz -OutFile termcap.tar.gz
+          tar -xvzf termcap.tar.gz
+
+      - name: Build - termcap
+        shell: bash
+        run: |
+          cd termcap-1.3.1
+          ./configure
+          make
+
+      - name: DL - termcap
+        run: |
           New-Item C:\termcap -ItemType Directory
-          Move-Item -Path termcap-bin\bin -Destination C:\termcap -force
-          Move-Item -Path termcap-lib\lib -Destination C:\termcap -force
-          Move-Item -Path termcap-lib\include -Destination C:\termcap -force
+          # New-Item C:\termcap\bin -ItemType Directory
+          New-Item C:\termcap\lib -ItemType Directory
+          New-Item C:\termcap\include -ItemType Directory
 
-          cd C:\termcap\lib
-          Remove-Item -Path * -Exclude libtermcap.a
-
-          ls C:\termcap
-          ls C:\termcap\include
-          ls C:\termcap\lib
+          cd termcap-1.3.1
+          mv termcap.h C:\termcap\include
+          mv termcap.o C:\termcap\lib
+          mv tparam.o C:\termcap\lib
+          mv version.o C:\termcap\lib
+          mv termcap.a C:\termcap\lib
 
       - name: Test - dl
         run: |
