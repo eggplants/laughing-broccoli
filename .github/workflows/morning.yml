@@ -36,4 +36,4 @@ jobs:
       - name: Post on Twitter
         run: |
           echo ${MY_SCREEN_NAME}
-          ./tweet.sh post "$(shindan 1068122 eggplants -l)"
+          ./tweet.sh post "$(shindan 1068122 eggplants -l -H)"
