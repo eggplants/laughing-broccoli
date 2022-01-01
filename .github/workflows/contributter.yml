@@ -2,7 +2,7 @@ name: Cron contributter
 
 on:
   schedule:
-    - cron: "1 15 * * *"
+  #  - cron: "1 15 * * *"
   workflow_dispatch:
 
 jobs:
