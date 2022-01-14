@@ -1,4 +1,4 @@
-name: Foo
+name: Check if TZ works
 on: workflow_dispatch # [push, pull_request]
 jobs:
   check-date:
