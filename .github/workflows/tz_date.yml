@@ -1,0 +1,14 @@
+name: Foo
+on: workflow_dispatch # [push, pull_request]
+jobs:
+  check-date:
+    env:
+      TZ: 'Asia/Tokyo'
+    runs-on: ubuntu-latest
+    run: date
+  check-date-each:
+    runs-on: ubuntu-latest
+    run: date
+    run: date
+    env:
+      TZ: 'Asia/Tokyo'
