@@ -5,10 +5,12 @@ jobs:
     env:
       TZ: 'Asia/Tokyo'
     runs-on: ubuntu-latest
-    run: date
+    steps:
+      - run: date
   check-date-each:
     runs-on: ubuntu-latest
-    run: date
-    run: date
-    env:
-      TZ: 'Asia/Tokyo'
+    steps:
+      - run: date
+      - run: date
+        env:
+          TZ: 'Asia/Tokyo'
