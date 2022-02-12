@@ -1,0 +1,27 @@
+name: Quote env test
+
+on: workflow_dispatch:
+  inputs:
+    v:
+      description: 'Versem'
+        required: true
+        default: '1.10'
+
+env:
+  e: 1.10
+  q_e: '1.10'
+  v_e: ${{ inputs.v }}
+  v_q_e: "${{ inputs.v }}"
+
+jobs:
+  test:
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check
+        run: |
+          echo ${{ env.e }}
+          echo ${{ env.q_e }}
+          echo ${{ env.v_e }}
+          echo ${{ env.v_q_e }}
+          
