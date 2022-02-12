@@ -11,8 +11,8 @@ on:
 env:
   e: 1.10
   q_e: '1.10'
-  v_e: ${{ inputs.v }}
-  v_q_e: "${{ inputs.v }}"
+  v_e: ${{ github.event.inputs.v }}
+  v_q_e: "${{ github.event.inputs.v }}"
 
 jobs:
   test:
