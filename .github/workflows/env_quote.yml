@@ -1,9 +1,10 @@
 name: Quote env test
 
-on: workflow_dispatch:
-  inputs:
-    v:
-      description: 'Versem'
+on:
+  workflow_dispatch:
+    inputs:
+      v:
+        description: 'Versem'
         required: true
         default: '1.10'
 
