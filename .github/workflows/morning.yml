@@ -2,7 +2,7 @@ name: Morning
 
 on:
   schedule:
-  #  - cron: "1 21 * * *"
+    - cron: "1 21 * * *"
   workflow_dispatch:
 
 jobs:
@@ -36,4 +36,4 @@ jobs:
       - name: Post on Twitter
         run: |
           echo ${MY_SCREEN_NAME}
-          ./tweet.sh post "$(shindan 1068122 eggplants -l -H)"
+          ./tweet.sh post "$(shindan 1116378 eggplants -l -H)"
