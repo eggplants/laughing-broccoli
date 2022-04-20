@@ -11,10 +11,6 @@ jobs:
     env:
       MY_SCREEN_NAME: egpl0
       MY_LANGUAGE: ja
-      CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
-      CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
-      ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_KEY }}
-      ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
       TZ: 'Asia/Tokyo'
     steps:
       - name: Check date
@@ -29,7 +25,17 @@ jobs:
         run: |
           curl -s https://raw.githubusercontent.com/eggplants/contributter.sh/master/contributter > contributter.sh
           chmod +x contributter.sh
-      - name: Post on Twitter
+      - name: Get status
+        id: tweet-status
         run: |
-          echo ${MY_SCREEN_NAME}
-          ./tweet.sh post "$(./contributter.sh eggplants)"
+          echo "::set-output name=STATUS::$(./contributter.sh eggplants)"
+      - name: Tweet
+        uses: snow-actions/tweet@v1.1.0
+        env:
+          CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          CONSUMER_API_SECRET_KEY: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_KEY }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+        with:
+          status: |
+            ${{ steps.tweet-status.outputs.STATUS }}
