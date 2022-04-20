@@ -31,7 +31,7 @@ jobs:
           status="${status//'%'/'%25'}"
           status="${status//$'\n'/'%0A'}"
           status="${status//$'\r'/'%0D'}"
-          echo '::set-output name=STATUS::${status}"
+          echo "::set-output name=STATUS::${status}"
       - name: Tweet
         uses: snow-actions/tweet@v1.1.0
         env:
