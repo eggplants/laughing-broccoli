@@ -27,7 +27,8 @@ jobs:
       - name: Get status
         id: tweet-status
         run: |
-          echo "::set-output name=STATUS::$(shindan 1118916 eggplants -l -H)"
+          status="$(shindan 1118916 eggplants -l -H)"
+          echo '::set-output name=STATUS::'"${status//$'\n'/\\n}"
       - name: Tweet
         uses: snow-actions/tweet@v1.1.0
         env:
