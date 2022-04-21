@@ -28,7 +28,11 @@ jobs:
       - name: Get status
         id: tweet-status
         run: |
-          echo "::set-output name=STATUS::$(./contributter.sh eggplants)"
+          status="$(./contributter.sh eggplants)"
+          status="${status//'%'/'%25'}"
+          status="${status//$'\n'/'%0A'}"
+          status="${status//$'\r'/'%0D'}"
+          echo "::set-output name=STATUS::${status}"
       - name: Tweet
         uses: snow-actions/tweet@v1.1.0
         env:
