@@ -27,7 +27,7 @@ jobs:
       - name: Get status
         id: tweet-status
         run: |
-          status="$(shindan 1118916 eggplants -l -H)"
+          status="$(shindan $(shuf -en1 1068122 1118916 1123662) eggplants -l -H)"
           status="${status//'%'/'%25'}"
           status="${status//$'\n'/'%0A'}"
           status="${status//$'\r'/'%0D'}"
