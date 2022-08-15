@@ -16,7 +16,7 @@ jobs:
           brew install python-tk@3.9 pyenv
 
       - name: Set up Python ${{ env.PYTHON_VERSION }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
