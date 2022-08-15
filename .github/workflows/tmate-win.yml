@@ -1,0 +1,8 @@
+name: Tmate Windows
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: mxschmitt/action-tmate@v3
+      timeout-minutes: 15
