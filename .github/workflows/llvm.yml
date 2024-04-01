@@ -27,7 +27,7 @@ jobs:
         with:
           persist-credentials: false   
       - name: Install LLVM and Clang
-        uses: KyleMayes/install-llvm-action@v1
+        uses: KyleMayes/install-llvm-action@v2
         with:
           version: "${{ github.event.inputs.llvm_version }}"
       - name: Check llvm
